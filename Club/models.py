@@ -29,14 +29,14 @@ class MeetingMinutes(models.Model):
 
     class Meta:
         db_table="meetingminutes"
-        verbose_name_plural='meeting minutes'
+        verbose_name_plural='meeting_minutes'
 
 class Resource(models.Model):
     resourcename=models.CharField(max_length=255)
     resourcetype=models.CharField(max_length=255)
     resourceurl=models.URLField(null=True, blank=True)
     #user=models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='resourceentrydate')
-    resourceentrydate=models.ForeignKey(User, auto_now_add=False)
+    resourceentrydate=models.ForeignKey(User, on_delete=models.DO_NOTHING)
     resourcedescription=models.TextField(null=True, blank=True, help_text='Add details about this resource')
 
     def __str__(self):
@@ -46,21 +46,21 @@ class Resource(models.Model):
         db_table="resource"
         verbose_name_plural="resources"
 
-class Event(models.Model):
+class EventOne(models.Model):
     eventtitle=models.CharField(max_length=255)
     eventlocation=models.CharField(max_length=255)
     eventdate=models.DateField()
     eventtime=models.CharField(max_length=255)
     eventdescription=models.TextField(null=True, blank=True, help_text='Add details about the event')
     #user=models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='memberid', null=True, blank=False)
-    memberid=models.CharField(max_length=255, null=True, blank=False)
+    user=models.ManyToManyField(User)
 
     def __str__(self):
         return self.eventtitle
 
     class Meta:
-        db_table="event"
-        verbose_name_plural="events"
+        db_table="eventone"
+        verbose_name_plural="events_one"
 
     
 
