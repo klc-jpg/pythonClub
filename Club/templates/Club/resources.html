@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+<table class='table'>
+    <tr>
+        <th>Resources</th>
+        <!--<th>Description</th>-->
+    </tr>
+    {% for resource in resource_list %}
+    <tr>
+        <td>{{ resource.resourcename }}</td>
+        <td>{{ resource.resourcetype }}</td>
+        <td>{{ resource.resourceurl }}</td>
+        <!---- <td>{{ resource.resourceentrydate }}</td>-->
+        <td>{{ resource.resourcedescription }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
