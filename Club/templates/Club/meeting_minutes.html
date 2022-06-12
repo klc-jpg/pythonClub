@@ -1,12 +1,29 @@
 {% extends 'base.html' %} {% block content %}
-<h2>Meeting Details</h2>
-<p>
-    Name: {{ details.meetingtitle }}</br>
-    Date: {{ details.meetingdate }}</br>
-    Time: {{ details.meetingtime }}</br>
-    Place: {{ details.meetinglocation }}</br>
-    Agenda: {{ details.meetingagenda }}</br>
-    Added by: {{ attendance }}</br>
-</p>
+<table class='table'>
+    <tr>
+        <th>Meeting Details</th>
+    </tr>
 
+    <tr>
+        <td><strong>Name:</strong> {{ details.meetingtitle }}</td>
+    </tr>
+    <tr>
+        <td><strong>Date:</strong> {{ details.meetingdate }}</td>
+    </tr>
+    <tr>
+        <td><strong>Time:</strong> {{ details.meetingtime }}</td>
+    </tr>
+    <tr>
+        <td><strong>Place:</strong> {{ details.meetinglocation }}</td>
+    </tr>
+    <tr>
+        <td><strong>Agenda:</strong> {{ details.meetingagenda }}</td>
+    </tr>
+    <tr>
+        <td><strong>Confirmed Attenendees:</strong>{{ attendance.users }}</td>
+    </tr>
+    <tr>
+        <td><strong>Notes:</strong>{{ minutestext }}</td>
+    </tr>
+</table>
 {% endblock %}

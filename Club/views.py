@@ -1,7 +1,11 @@
 from contextlib import contextmanager
 from django.shortcuts import render, get_object_or_404
-from .models import Meeting, MeetingMinutes, Resource, Event 
+from .models import Meeting, MeetingMinutes, Resource
+from django.contrib.auth.models import User
+from django.views.generic import DetailView
+from django.utils import timezone
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
@@ -15,21 +19,18 @@ def meetings_view(request):
     meeting_list=Meeting.objects.all()
     return render(request, 'Club/meetings.html', {'meeting_list': meeting_list})
 
-#def meeting_detail(request, id):
-    #details=get_object_or_404(Meeting, pk=id)
-    #return render(request, 'Club/meeting_minutes.html', {'details': details})
-
 def meeting_detail(request, id):
     details=get_object_or_404(Meeting, pk=id)
-    attendance=MeetingMinutes.objects.only("meetingid", "minutestext").only("attendance")
+    mins_list=MeetingMinutes.objects.all()
+    users = User.objects.all()
     context={
         'details': details,
-        'attendance': attendance,
+        'mins_list': mins_list,
+        'users': users, 
+      
     }
-    return render(request, 'Club/meeting_minutes.html',context=context)
+    return render (request, 'Club/meeting_minutes.html',context=context)
 
 
-
-
-
-
+        
+ 

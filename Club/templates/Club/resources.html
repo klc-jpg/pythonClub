@@ -1,18 +1,20 @@
 {% extends 'base.html' %} {% block content %}
-<h2>Resources</h2>
+<!--<h2>Resources</h2>-->
 <table class='table'>
     <tr>
-        <th>Name</th>
+        <th>Resources</th>
+        <!--<th>Name</th>
         <th>Type</th>
         <th>URL</th>
-        <th>Description</th>
+        <th>Description</th>-->
     </tr>
     {% for r in resource_list %}
     <tr>
         <td>{{ r.resourcename }}</td>
         <td>{{ r.resourcetype }}</td>
         <td>{{ r.resourceurl }}</td>
-        <!---- <td>{{ resource.resourceentrydate }}</td>-->
+        <!---- <td>{{ resource.dateentered }}</td>-->
+        <!---- <td>{{ resource.userid }}</td>-->
         <td>{{ r.resourcedescription }}</td>
     </tr>
     {% endfor %}
