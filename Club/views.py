@@ -6,6 +6,7 @@ from django.views.generic import DetailView
 from django.utils import timezone
 from django.urls import reverse_lazy
 from django.http import HttpResponse
+from .forms import MeetingForm, ResourceForm
 
 # Create your views here.
 def index(request):
@@ -26,10 +27,33 @@ def meeting_detail(request, id):
     context={
         'details': details,
         'mins_list': mins_list,
-        'users': users, 
-      
+        'users': users,  
     }
-    return render (request, 'Club/meeting_minutes.html',context=context)
+    return render(request, 'Club/meeting_minutes.html',context=context)
+
+def new_meeting(request):
+    form=MeetingForm 
+    if request.method=='POST':
+        form=MeetingForm(request.POST)
+        if form.is_valid():
+            post=form.save(commit=True)
+            post.save()
+            form=MeetingForm()
+    else:
+        form=MeetingForm()
+    return render(request, 'Club/new_meeting.html', {'form': form}) 
+
+def new_resource(request):
+    form=ResourceForm 
+    if request.method=='POST':
+        form=ResourceForm(request.POST)
+        if form.is_valid():
+            post=form.save(commit=True)
+            post.save()
+            form=ResourceForm()
+    else:
+        form=ResourceForm()
+    return render(request, 'Club/new_resource.html', {'form': form}) 
 
 
         

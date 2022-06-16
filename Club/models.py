@@ -11,7 +11,7 @@ class Meeting(models.Model):
     meetingdate=models.DateField()
     meetingtime=models.CharField(max_length=255)
     meetinglocation=models.CharField(max_length=255)
-    meetingagenda=models.TextField(null=True, blank=True, help_text='Add meeting agenda details')
+    meetingagenda=models.TextField(null=True, blank=True)#, help_text='Add meeting agenda details')
 
     def __str__(self):
         return self.meetingtitle
@@ -26,7 +26,7 @@ class MeetingMinutes(models.Model):
     attendance=models.ManyToManyField(User)
     
     def __str__(self):
-        return self.meetingid
+        return (self.meetingid)
 
     class Meta:
         db_table="meetingminutes"
@@ -38,7 +38,7 @@ class Resource(models.Model):
     resourceurl=models.URLField(null=True, blank=True)
     dateentered=models.DateField(default=date.today)
     userid=models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    resourcedescription=models.TextField(null=True, blank=True, help_text='Add details about this resource')
+    resourcedescription=models.TextField(null=True, blank=True)#, help_text='Add details about this resource')
 
     def __str__(self):
         return self.resourcename
