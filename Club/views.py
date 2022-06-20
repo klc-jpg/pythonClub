@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from .forms import MeetingForm, ResourceForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -31,6 +32,7 @@ def meeting_detail(request, id):
     }
     return render(request, 'Club/meeting_minutes.html',context=context)
 
+@login_required
 def new_meeting(request):
     form=MeetingForm 
     if request.method=='POST':
@@ -43,6 +45,7 @@ def new_meeting(request):
         form=MeetingForm()
     return render(request, 'Club/new_meeting.html', {'form': form}) 
 
+@login_required
 def new_resource(request):
     form=ResourceForm 
     if request.method=='POST':
@@ -55,6 +58,11 @@ def new_resource(request):
         form=ResourceForm()
     return render(request, 'Club/new_resource.html', {'form': form}) 
 
+def login_message(request):
+    return render(request, 'Club/login_message.html')
+
+def logout_message(request):
+    return render(request, 'Club/logout_message.html')
 
         
  
